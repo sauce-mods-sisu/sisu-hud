@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="settings-page" tabindex="0" data-settings-key="lap-data-settings-v1">
+  <head>
+    <meta charset="utf-8" />
+    <title>SISU Simple HUD</title>
+
+    <style>
+      /* ========== RESET & BASIC STYLING ========== */
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Hide the main window scrollbars */
+        background: transparent;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 900; /* Bold for high contrast */
+        color: #0f0;      /* Neon-green text */
+      }
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      /*
+        #hud-content: bounding box in px, user resizes from bottom-right corner.
+        Inside, we have:
+          - A header bar (no-drag region) for config panel
+          - #stats-container for data fields
+          - .resize-handle at bottom-right
+      */
+      #hud-content {
+        position: absolute;
+        top: 5vh;        /* 5% of viewport height from the top */
+        left: 5vw;       /* 5% of viewport width from the left */
+        width: 50vw;     /* 50% of viewport width */
+        height: 40vh;    /* 40% of viewport height */
+
+        background: transparent; 
+        border: 1px dashed rgba(0,255,0,0.2);
+        -webkit-app-region: drag;
+        user-select: none;
+    }
+
+    /* ========== 4) HUD HEADER BAR (FADED UNTIL HOVER) ========== */
+    .hud-header {
+      -webkit-app-region: no-drag; 
+      position: absolute;
+      top: 0; 
+      left: 0;
+      right: 0;
+      height: 24px;
+
+      /* Light background, but extremely faint initially: */
+      background: rgba(0,0,0,0.5);
+      /* We'll fade the entire bar’s opacity from near-invisible to more visible */
+      opacity: 0.05; 
+      transition: opacity 0.3s ease;
+      
+      border-bottom: 1px solid rgba(0,255,0,0.3);
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+    }
+    .hud-header:hover {
+      /* On hover, we raise opacity significantly for better visibility */
+      opacity: 0.8;
+    }
+
+      /* The text scale slider + label can live here. 
+         We can style it further or add more config controls later. */
+      .config-panel {
+        display: flex;
+        align-items: center;
+        gap: 4px; /* space between label & slider */
+        color: #0f0;
+        font-family: "Orbitron", sans-serif;
+        font-size: 14px;
+      }
+
+      .config-panel label {
+        font-weight: 600;
+      }
+
+      #scale-slider {
+        width: 120px;
+        accent-color: #0f0; 
+      }
+      #scale-slider::-webkit-slider-runnable-track {
+        background: #333;
+        height: 6px;
+      }
+      #scale-slider::-webkit-slider-thumb {
+        width: 14px;
+        height: 14px;
+        background: #0f0;
+        border: 1px solid #0f0;
+        cursor: pointer;
+        margin-top: -4px; 
+      }
+
+      /* 
+        #stats-container: position below the header bar, 
+        so that the header doesn't overlap data fields.
+      */
+      #stats-container {
+        position: absolute;
+        top: 40px;  /* space for the header */
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+        padding: 0.5em;
+
+        font-size: 24px; /* base text size */
+        line-height: 1.2;
+        text-shadow: 0 0 4px rgba(0,0,0,0.8);
+      }
+      #stats-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .stat-row {
+        display: flex;
+        align-items: center;
+      }
+      .stat-icon {
+        margin-right: 0.3em;
+        width: 1em;
+        height: 1em;
+        fill: currentColor;
+        stroke: currentColor;
+        stroke-width: 0.05em;
+      }
+
+      /* The bottom-right handle for resizing the bounding box. */
+      .resize-handle {
+        -webkit-app-region: no-drag;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        background: #0f0;
+        opacity: 0.5;
+        cursor: nwse-resize;
+        z-index: 999;
+      }
+      .stat-value {
+        display: inline-block;    /* or block/flex, as needed */
+        width: 7ch;               /* 5 "character" widths */
+        text-align: left;        /* if you want numbers right-aligned */
+        overflow: hidden;         /* hide overflow if longer than 5ch */
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <div id="hud-content">
+
+      <!-- 1) A small header bar for the config panel (no-drag) -->
+      <div class="hud-header">
+        <div class="config-panel">
+          <label for="scale-slider">Scale</label>
+          <input 
+            id="scale-slider"
+            type="range"
+            min="0.5"
+            max="2.0"
+            step="0.05"
+            value="1"
+          />
+        </div>
+      </div>
+
+      <!-- 2) The data fields container (blown away each render) -->
+      <div id="stats-container"></div>
+
+      <!-- 3) The bottom-right resize handle. -->
+      <div class="resize-handle"></div>
+    </div>
+
+    <!-- The <template> for data fields -->
+    <template id="stats-template">
+      <div class="stat-row">
+        <img src="icons/cadence.svg" class="stat-icon" alt="Cadence" />
+        <span class="stat-value cadence-value"></span>
+      </div>
+      <div class="stat-row">
+        <img src="icons/wind.svg" class="stat-icon" alt="Draft" />
+        <span class="stat-value draft-value"></span>
+      </div>
+      <div class="stat-row">
+        <img src="icons/heart.svg" class="stat-icon" alt="Heart Rate" />
+        <span class="stat-value hr-value"></span>
+      </div>
+      <div class="stat-row">
+        <img src="icons/bolt.svg" class="stat-icon" alt="Power" />
+        <span class="stat-value power-value"></span>
+      </div>
+      <div class="stat-row">
+        <img src="icons/wkg.svg" class="stat-icon" alt="w/kg" />
+        <span class="stat-value wkg-value"></span>
+      </div>
+      <div class="stat-row">
+        <img src="icons/speedometer.svg" class="stat-icon" alt="Speed" />
+        <span class="stat-value speed-value"></span>
+      </div>
+      <div class="stat-row">
+        <img src="icons/battery-half.svg" class="stat-icon" alt="wBal" />
+        <span class="stat-value wbal-value"></span>
+      </div>
+      <div class="stat-row">
+        <img src="icons/clock.svg" class="stat-icon" alt="Time on Course" />
+        <span class="stat-value time-value"></span>
+      </div>
+    </template>
+
+    <!-- 4) Load your separate JS after DOM is ready -->
+    <script type="module" src="src/hud.mjs"></script>
+  </body>
+</html>
