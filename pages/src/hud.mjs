@@ -12,6 +12,7 @@ const settings             = common.settingsStore.get();
 const configNamespace      = "sisu-hud-config-";
 const fieldStateSettingKey = configNamespace + 'hudFieldOrder';
 const boundingBoxSettingsKey = configNamespace + 'sisu-hud-bounds';
+const textScalingFactorSettingsKey = configNamespace + 'sisu-hud-text-scaling';
 
 const renderer             = new common.Renderer(hudContent, { fps: 1 });
 
@@ -57,6 +58,12 @@ if (hudBox) {
   hudContent.style.height = "40vh";
 }
 
+// Load saved text scaling factor
+
+const savedScale = parseFloat(settings[textScalingFactorSettingsKey] || "1");
+scaleSlider.value = savedScale;
+statsContainer.style.fontSize = (24 * savedScale) + 'px';
+
 renderFields();
 initDragAndDrop();
 
@@ -96,9 +103,14 @@ function onMouseUp() {
   saveHudBox();
 }
 
+function saveScale(newScale) {
+  common.settingsStore.set(textScalingFactorSettingsKey, newScale);
+}
+
 scaleSlider.addEventListener('input', e => {
   const scale = parseFloat(e.target.value);
   statsContainer.style.fontSize = (24 * scale) + 'px';
+  saveScale(scale);
 });
 
 resetBtn.addEventListener('click', resetAllVisibility);
