@@ -55,7 +55,7 @@ Sisu means 'go' in Finnish but more importantly it's the team I race with, I bot
 ### 2. What problem does SISU HUD solve?
 I have Zwift on a TV and was in a Team Time Trial (TTT) recently, we had scheduled pulls every 30 seconds.  I found it impossible to concentrate on my w/kg AND see the time remaining in my pull.  I was also a professional poker player in a former life and we had HUDs that displayed opponent's stats which was the main inspiration for SISU HUD, to place all relevant data right on your avatar (or whever you like).  
 
-### 3. Where is ideal placement?
+### 3. Where is ideal placement of the HUD on Zwift?
 I look forward to the creative ways the community uses this, I recommend placing in very near to your rider/avatar.  I think it's important to watch your rider as closely as possible during races to pick up cues from your competitors and to maximize the draft.  Having all of your relevant data nearer your focal point solves the problem of split attention.
 
 ## Future Features

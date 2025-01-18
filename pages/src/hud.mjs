@@ -5,12 +5,14 @@ const resizeHandle    = document.querySelector('.resize-handle');
 const statsContainer  = document.getElementById('stats-container');
 const scaleSlider     = document.getElementById('scale-slider');
 const resetBtn        = document.getElementById('reset-visibility-btn');
-const tmpl            = document.getElementById('stats-template');
 
 let USER = 0;
+
 const settings             = common.settingsStore.get();
 const configNamespace      = "sisu-hud-config-";
 const fieldStateSettingKey = configNamespace + 'hudFieldOrder';
+const boundingBoxSettingsKey = configNamespace + 'sisu-hud-bounds';
+
 const renderer             = new common.Renderer(hudContent, { fps: 1 });
 
 let fields = [
@@ -40,6 +42,21 @@ if (Array.isArray(savedFieldState)) {
   );
 }
 
+// Load bounding box positions
+const hudBox = settings[boundingBoxSettingsKey] || false;
+if (hudBox) {
+  hudContent.style.width  = hudBox.width  + "px";
+  hudContent.style.height = hudBox.height + "px";
+  hudContent.style.top    = hudBox.top    + "px";
+  hudContent.style.left   = hudBox.left   + "px";
+} else {
+  // defaults
+  hudContent.style.top = "5vh";
+  hudContent.style.left = "5vw";
+  hudContent.style.width = "50vw";
+  hudContent.style.height = "40vh";
+}
+
 renderFields();
 initDragAndDrop();
 
@@ -61,9 +78,22 @@ function onMouseMove(e) {
   hudContent.style.height = Math.max(50,  originalHeight + dy) + 'px';
 }
 
+function saveHudBox() {
+  const rect = hudContent.getBoundingClientRect();
+  const hudBox = {
+    width:  rect.width,
+    height: rect.height,
+    top:    rect.top,
+    left:   rect.left
+  };
+  common.settingsStore.set(boundingBoxSettingsKey, hudBox);
+}
+
 function onMouseUp() {
   document.removeEventListener('mousemove', onMouseMove);
   document.removeEventListener('mouseup', onMouseUp);
+
+  saveHudBox();
 }
 
 scaleSlider.addEventListener('input', e => {
@@ -92,13 +122,12 @@ function resetAllVisibility() {
   renderFields();
 }
 
-function hideField(fieldId) {
-  console.log("hideField for:", fieldId);
+function hideField(fieldId, rowElement) {
+  rowElement.remove();
   const field = fields.find(f => f.id === fieldId);
   if (!field) return;
   field.isVisible = false;
   saveFields();
-  renderFields();
 }
 
 function renderFields() {
@@ -115,7 +144,7 @@ function renderFields() {
     img.classList.add('stat-icon');
     img.addEventListener('contextmenu', e => {
       e.preventDefault();
-      hideField(field.id);
+      hideField(field.id, row);
     });
 
     const span = document.createElement('span');
