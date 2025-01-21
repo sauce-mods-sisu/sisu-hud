@@ -27,7 +27,8 @@ let fields = [
   { id: 'time',    label: 'Time on Course', icon: 'icons/clock.svg', valueClass: 'time-value', isVisible: true },
   { id: 'kj',    label: 'kj', icon: 'icons/kj.svg', valueClass: 'kj-value', isVisible: true },
   { id: 'distance',    label: 'distance', icon: 'icons/ruler-horizontal.svg', valueClass: 'distance-value', isVisible: true },
-  { id: 'climb',    label: 'climb', icon: 'icons/mountain.svg', valueClass: 'climb-value', isVisible: true }
+  { id: 'climb',    label: 'climb', icon: 'icons/mountain.svg', valueClass: 'climb-value', isVisible: true },
+  { id: 'grade',    label: 'Grade', icon: 'icons/grade.svg', valueClass: 'grade-value', isVisible: true },
 ];
 
 // Load saved field state
@@ -62,7 +63,7 @@ if (hudBox) {
 
 const savedScale = parseFloat(settings[textScalingFactorSettingsKey] || "1");
 scaleSlider.value = savedScale;
-statsContainer.style.fontSize = (24 * savedScale) + 'px';
+statsContainer.style.fontSize = (36 * savedScale) + 'px';
 
 renderFields();
 initDragAndDrop();
@@ -182,7 +183,6 @@ function updateStats(data) {
 }
 
 renderer.addCallback(rawData => {
-  console.log("callback hit!");
   if (!rawData) return;
 
   const athlete = rawData.athlete || {};
@@ -191,7 +191,12 @@ renderer.addCallback(rawData => {
   const numericPower  = Number(state.power  ?? 0);
   const numericWeight = Number(athlete.weight ?? 0);
   const numericWBal   = Number(rawData.wBal ?? -1);
-
+  
+  if (state.grade !== undefined) {
+    console.log("Raw state.grade value:", state.grade);
+    console.log("As Number():", Number(state.grade));
+  }
+  
   const updatedStats = {
     cadence: (state.cadence !== undefined) ? Number(state.cadence).toFixed(0) : "N/A",
     draft:   (state.draft   !== undefined) ? Number(state.draft).toFixed(0)   : "N/A",
@@ -205,7 +210,10 @@ renderer.addCallback(rawData => {
     ? ((Number(state.eventDistance) / 1000).toFixed(1) + " km")
     : "--",
     climb:    (state.climbing    !== undefined) ? Number(state.climbing).toFixed(0) : "--",
-    wbal:    "N/A"
+    wbal:    "N/A",
+    grade: (state.grade !== undefined)
+    ? (Number(state.grade) * 100).toFixed(2)  + " %"
+    : "--",
   };
 
   if (numericWBal >= 0) {
