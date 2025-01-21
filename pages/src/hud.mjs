@@ -60,10 +60,11 @@ if (hudBox) {
 }
 
 // Load saved text scaling factor
+const baseFontSize = 36;
 
 const savedScale = parseFloat(settings[textScalingFactorSettingsKey] || "1");
 scaleSlider.value = savedScale;
-statsContainer.style.fontSize = (36 * savedScale) + 'px';
+statsContainer.style.fontSize = (baseFontSize * savedScale) + 'px';
 
 renderFields();
 initDragAndDrop();
@@ -117,14 +118,10 @@ function onMouseUp() {
   saveHudBox();
 }
 
-function saveScale(newScale) {
-  common.settingsStore.set(textScalingFactorSettingsKey, newScale);
-}
-
 scaleSlider.addEventListener('input', e => {
   const scale = parseFloat(e.target.value);
-  statsContainer.style.fontSize = (24 * scale) + 'px';
-  saveScale(scale);
+  statsContainer.style.fontSize = (baseFontSize * scale) + 'px';
+  common.settingsStore.set(textScalingFactorSettingsKey, newScale);
 });
 
 resetBtn.addEventListener('click', resetAllVisibility);
@@ -192,6 +189,13 @@ function updateStats(data) {
     if (!span) return;
     const val = data[field.id];
     span.textContent = val != null ? val : '--';
+  });
+}
+
+const closeBtn = document.getElementById('close-btn');
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
+    window.close();
   });
 }
 

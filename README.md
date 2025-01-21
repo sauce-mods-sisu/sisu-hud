@@ -32,6 +32,13 @@ Documents
 
 # Changelog 
 ------------------
+## 20 January 2025
+------------------
+Alpha 0.0.2
+Added gradient stat
+Made progress with boungding box issue
+Added close button to window
+
 ## 17 January 2025
 ------------------
 Added icon/stat sort, visibility settings, and restoring

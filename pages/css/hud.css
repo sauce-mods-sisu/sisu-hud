@@ -1,14 +1,4 @@
-/* html.settings-page.electron-mode {
-  width: 100vw !important;
-  height: 100vh !important;
-  overflow: visible !important;
-} */
-
-/* ========== RESET & BASIC STYLING ========== */
 html, body {
-  /* width: 100vw !important;
-  height: 100vh !important;
-  overflow: visible !important; */
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -16,81 +6,81 @@ html, body {
   padding: 0;
   background: transparent;
   font-family: "Orbitron", sans-serif;
-  font-weight: 900; /* Bold for high contrast */
-  color: #0f0;      /* Neon-green text */
+  font-weight: 900; 
+  color: #0f0;    
 }
 body::-webkit-scrollbar {
   display: none;
 }
 
-/* .settings-page.electron-mode body {
-  width: 100vw !important;
-  height: 100vh !important;
-  overflow: visible !important;
-} */
-
 #hud-content {
   position: relative;
-  top: 5vh;        /* 5% of viewport height from the top */
-  left: 5vw;       /* 5% of viewport width from the left */
-  width: 50vw;     /* 50% of viewport width */
-  height: 40vh;    /* 40% of viewport height */
+  top: 5vh;     
+  left: 5vw;       
+  width: 50vw;     
+  height: 40vh;    
   background: transparent; 
   border: 1px dashed rgba(0,255,0,0.2);
   user-select: none;
   z-index: 9999;
 }
 
-/* ========== 4) HUD HEADER BAR (FADED UNTIL HOVER) ========== */
 .hud-header {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 24px;
-
-  /* background, opacity, transitions, etc. */
-  background: rgba(0,0,0,0.5);
-  opacity: 0.10;
-  transition: opacity 0.3s ease;
-
-  border-bottom: 1px solid rgba(0,255,0,0.3);
   display: flex;
   align-items: center;
   padding: 0 4px;
+  padding-right: 48px; 
 
-  /* 
-    By default, do NOT drag the entire header.
-    We'll give the drag region to .drag-handle only.
-  */
+  background: rgba(0,0,0,0.5);
+  border-bottom: 1px solid rgba(0,255,0,0.3);
+  
+  opacity: 0.10;
+  transition: opacity 0.3s ease;
   -webkit-app-region: drag;
 }
 .hud-header:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* The portion that actually drags the window. */
+.close-btn {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  -webkit-app-region: no-drag;
+
+  background: #333;
+  color: #0f0;
+  border: 1px solid #0f0;
+  padding: 0 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "Orbitron", sans-serif;
+}
+
+.close-btn:hover {
+  background: #0f0;
+  color: #333;
+}
+
 .drag-handle {
-  -webkit-app-region: drag; /* This is the actual window-drag handle */
+  -webkit-app-region: drag; 
   display: flex;
   align-items: center;
   gap: 4px;
-  cursor: grab; /* optional style to indicate dragging */
-
-  /* 
-    The drag-handle is on the left;
-    we use margin-right: auto to push .config-panel to the right.
-  */
+  cursor: grab; 
   margin-right: auto;
 }
 .drag-handle img {
-  width: 20px; /* adjust as needed */
+  width: 20px; 
   height: 20px;
 }
 .drag-handle img:hover {
   opacity: 1.0;       
 }
-/* The config panel (slider + reset button) on the right side. */
+
 .config-panel {
   -webkit-app-region: no-drag; 
   display: flex;
@@ -103,7 +93,6 @@ body::-webkit-scrollbar {
   -webkit-app-region: no-drag;
 }
 
-/* More stylish reset button */
 #reset-visibility-btn {
   background: #333;
   color: #0f0;
@@ -139,13 +128,9 @@ body::-webkit-scrollbar {
   margin-top: -4px; 
 }
 
-/* 
-  #stats-container: position below the header bar, 
-  so that the header doesn't overlap data fields.
-*/
 #stats-container {
   position: absolute;
-  top: 40px;  /* space for the header */
+  top: 40px; 
   left: 0;
   right: 0;
   bottom: 0;
@@ -157,7 +142,7 @@ body::-webkit-scrollbar {
   column-gap: 0.125em;
   padding: 0.0;
 
-  font-size: 24px; /* base text size */
+  font-size: 24px; 
   line-height: 1.0;
   text-shadow: 0 0 4px rgba(0,0,0,0.8);
 }
@@ -179,7 +164,6 @@ body::-webkit-scrollbar {
   stroke-width: 0.05em;
 }
 
-/* The bottom-right handle for resizing the bounding box. */
 .resize-handle {
   -webkit-app-region: no-drag;
   position: absolute;
@@ -194,15 +178,11 @@ body::-webkit-scrollbar {
 }
 .stat-value {
   display: inline-block;
-  width: 7ch;    /* 7 "character" widths (adjust as desired) */
+  width: 7ch;   
   text-align: left;
   overflow: hidden;
 }
 
-/* 
-  Re-define these to ensure they remain no-drag 
-  (included for completeness).
-*/
 .stat-row,
 .resize-handle {
   -webkit-app-region: no-drag;
