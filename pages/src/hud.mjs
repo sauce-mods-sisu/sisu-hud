@@ -82,8 +82,21 @@ resizeHandle.addEventListener('mousedown', e => {
 function onMouseMove(e) {
   const dx = e.clientX - startX;
   const dy = e.clientY - startY;
-  hudContent.style.width  = Math.max(100, originalWidth + dx) + 'px';
-  hudContent.style.height = Math.max(50,  originalHeight + dy) + 'px';
+
+  let newWidth = originalWidth + dx;
+  let newHeight = originalHeight + dy;
+
+  const winWidth = window.innerWidth * 0.95;
+  const winHeight = window.innerHeight * 0.95;
+
+  newWidth = Math.min(newWidth, winWidth);
+  newHeight = Math.min(newHeight, winHeight);
+
+  newWidth = Math.max(newWidth, 100);
+  newHeight = Math.max(newHeight, 100);
+
+  hudContent.style.width = newWidth + 'px';
+  hudContent.style.height = newHeight + 'px';
 }
 
 function saveHudBox() {
@@ -191,11 +204,6 @@ renderer.addCallback(rawData => {
   const numericPower  = Number(state.power  ?? 0);
   const numericWeight = Number(athlete.weight ?? 0);
   const numericWBal   = Number(rawData.wBal ?? -1);
-  
-  if (state.grade !== undefined) {
-    console.log("Raw state.grade value:", state.grade);
-    console.log("As Number():", Number(state.grade));
-  }
   
   const updatedStats = {
     cadence: (state.cadence !== undefined) ? Number(state.cadence).toFixed(0) : "N/A",
