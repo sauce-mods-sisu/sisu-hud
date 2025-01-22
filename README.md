@@ -18,13 +18,13 @@ Documents
 ## Usage
 ------------------
 ### Basic Features
--Turn the mod on in Sauce Settings.
--The window is draggable by the top config bar to place
--The window is resizable by the bottom right-hand corner green box "resizeHandle"
--Icons can be dragged into the order you want and will be saved
--Right-clicking will make a stat visible that you don't care about
--In the config bar you can "Reset Visibility" to restore all stat fields
--Text scales and your scaling options are saved
+- Turn the mod on in Sauce Settings.
+- The window is draggable by the top config bar to place
+- The window is resizable by the bottom right-hand corner green box "resizeHandle"
+- Icons can be dragged into the order you want and will be saved
+- Right-clicking will make a stat visible that you don't care about
+- In the config bar you can "Reset Visibility" to restore all stat fields
+- Text scales and your scaling options are saved
 
 ### Demos
 - Pilot: https://www.youtube.com/watch?v=o0c5v4ga8A0
