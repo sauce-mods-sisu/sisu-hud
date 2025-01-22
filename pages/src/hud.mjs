@@ -60,7 +60,7 @@ if (hudBox) {
 }
 
 // Load saved text scaling factor
-const baseFontSize = 36;
+const baseFontSize = 40;
 
 const savedScale = parseFloat(settings[textScalingFactorSettingsKey] || "1");
 scaleSlider.value = savedScale;
@@ -121,7 +121,7 @@ function onMouseUp() {
 scaleSlider.addEventListener('input', e => {
   const scale = parseFloat(e.target.value);
   statsContainer.style.fontSize = (baseFontSize * scale) + 'px';
-  common.settingsStore.set(textScalingFactorSettingsKey, newScale);
+  common.settingsStore.set(textScalingFactorSettingsKey, scale);
 });
 
 resetBtn.addEventListener('click', resetAllVisibility);

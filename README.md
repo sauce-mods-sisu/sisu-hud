@@ -1,7 +1,7 @@
 SISU HUD - Minimalist HUD 
 =========================
 
-![SISU HUD Logo](images/sisu-hud-logo.png)
+![SISU HUD Logo](https://raw.githubusercontent.com/sauce-mods-sisu/sisu-hud/main/images/sisu-hud-logo.png)
 
 
 ## Installing
@@ -34,6 +34,12 @@ Documents
 
 # Changelog 
 ------------------
+
+## 22 January 2025
+------------------
+Alpha 0.0.2
+Fixed scaling bug
+
 ## 20 January 2025
 ------------------
 Alpha 0.0.2
