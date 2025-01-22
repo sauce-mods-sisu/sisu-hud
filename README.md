@@ -1,7 +1,7 @@
 SISU HUD - Minimalist HUD 
 =========================
 
-![SISU HUD Logo](images/sisu-logo.svg)
+![SISU HUD Logo](images/sisu-hud-logo.png)
 
 
 ## Installing
