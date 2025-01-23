@@ -60,7 +60,7 @@ if (hudBox) {
 }
 
 // Load saved text scaling factor
-const baseFontSize = 40;
+const baseFontSize = 48;
 
 const savedScale = parseFloat(settings[textScalingFactorSettingsKey] || "1");
 scaleSlider.value = savedScale;
@@ -199,6 +199,51 @@ if (closeBtn) {
   });
 }
 
+window.addEventListener('resize', onWindowResize);
+
+function clampHud(winWidth, winHeight) {
+  const hudRect = hudContent.getBoundingClientRect();
+
+  // 1) Possibly shrink HUD to fit if it’s bigger than window
+  let newW = hudRect.width;
+  let newH = hudRect.height;
+  if (newW > winWidth) newW = winWidth;
+  if (newH > winHeight) newH = winHeight;
+
+  hudContent.style.width = newW + 'px';
+  hudContent.style.height = newH + 'px';
+
+  // 2) Re-check bounding box after we’ve adjusted size
+  const newRect = hudContent.getBoundingClientRect();
+  let currentLeft = parseFloat(hudContent.style.left) || newRect.left;
+  let currentTop  = parseFloat(hudContent.style.top)  || newRect.top;
+
+  // 3) Clamp position: if right or bottom edge is off-screen, move it back
+  if (currentLeft + newRect.width > winWidth) {
+    currentLeft = winWidth - newRect.width;
+  }
+  if (currentTop + newRect.height > winHeight) {
+    currentTop = winHeight - newRect.height;
+  }
+
+  // 4) Prevent negative
+  if (currentLeft < 0) currentLeft = 0;
+  if (currentTop < 0) currentTop = 0;
+
+  hudContent.style.left = currentLeft + 'px';
+  hudContent.style.top  = currentTop + 'px';
+}
+
+function onWindowResize() {
+  console.log('Window Resize!')
+  // The window has a new width/height:
+  const winWidth = window.innerWidth;
+  const winHeight = window.innerHeight;
+
+  clampHud(winWidth, winHeight);
+}
+
+
 renderer.addCallback(rawData => {
   if (!rawData) return;
 
@@ -208,7 +253,7 @@ renderer.addCallback(rawData => {
   const numericPower  = Number(state.power  ?? 0);
   const numericWeight = Number(athlete.weight ?? 0);
   const numericWBal   = Number(rawData.wBal ?? -1);
-  
+
   const updatedStats = {
     cadence: (state.cadence !== undefined) ? Number(state.cadence).toFixed(0) : "N/A",
     draft:   (state.draft   !== undefined) ? Number(state.draft).toFixed(0)   : "N/A",
@@ -218,8 +263,8 @@ renderer.addCallback(rawData => {
     wkg:     (numericWeight > 0)           ? (numericPower / numericWeight).toFixed(2) : "N/A",
     time:    (state.time    !== undefined) ? formatTime(Number(state.time).toFixed(0)) : "--",
     kj:    (state.kj    !== undefined) ? Number(state.kj).toFixed(0) : "--",
-    distance: (state.eventDistance !== undefined)
-    ? ((Number(state.eventDistance) / 1000).toFixed(1) + " km")
+    distance: (state.distance !== undefined)
+    ? ((Number(state.distance) / 1000).toFixed(1) + " km")
     : "--",
     climb:    (state.climbing    !== undefined) ? Number(state.climbing).toFixed(0) : "--",
     wbal:    "N/A",

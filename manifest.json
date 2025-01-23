@@ -3,7 +3,7 @@
     "name"            : "SISU HUD",
     "description"     : "Simple HUD that pins vital stats directly on your Zwift Rider",
     "author"          : "Ryan McCormick",
-    "website_url"     : "",
+    "website_url"     : "https://github.com/sauce-mods-sisu/sisu-hud",
     "version"         : "0.0.2",
     "content_js": [
         "contents/theme.js"
@@ -21,7 +21,7 @@
         "overlay"       : true,
         "frame"         : false,
         "default_bounds": {
-            "width" : 200,
+            "width" : 600,
             "height": 200,
             "x"     : 100,
             "y"     : -100
