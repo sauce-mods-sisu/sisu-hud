@@ -45,7 +45,6 @@ body::-webkit-scrollbar {
   opacity: 0.85;
 }
 
-
 .close-btn {
   position: absolute;
   top: 2px;
@@ -65,7 +64,6 @@ body::-webkit-scrollbar {
   background: #0f0;
   color: #333;
 }
-
 
 .config-panel {
   -webkit-app-region: no-drag; 
@@ -129,9 +127,7 @@ body::-webkit-scrollbar {
   column-gap: 0.125em;
   padding: 0.0;
 
-  font-size: 24px; 
-  line-height: 1.0;
-  text-shadow: 0 0 4px rgba(0,0,0,0.8);
+
 }
 #stats-container::-webkit-scrollbar {
   display: none;
@@ -146,9 +142,9 @@ body::-webkit-scrollbar {
   margin-right: 0.3em;
   width: 1em;
   height: 1em;
-  fill: currentColor;
-  stroke: currentColor;
   stroke-width: 0.05em;
+  text-shadow: none;
+  color: none;
 }
 
 .resize-handle {
@@ -168,6 +164,9 @@ body::-webkit-scrollbar {
   width: 7ch;   
   text-align: left;
   overflow: hidden;
+  font-size: 24px; 
+  line-height: 1.0;
+  text-shadow: 0 0 4px rgba(0,0,0,0.8);
 }
 
 .stat-row,
