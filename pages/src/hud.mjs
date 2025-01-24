@@ -15,7 +15,7 @@ const boundingBoxSettingsKey = configNamespace + 'sisu-hud-bounds';
 const textScalingFactorSettingsKey = configNamespace + 'sisu-hud-text-scaling';
 const modalSettingsKey = configNamespace + 'sisu-general-settings';
 
-const renderer             = new common.Renderer(hudContent, { fps: 1 });
+const renderer             = new common.Renderer(hudContent, { fps: 2 });
 
 let fields = [
   { id: 'cadence', label: 'Cadence', icon: 'icons/cadence.svg', valueClass: 'cadence-value',  isVisible: true },
@@ -33,17 +33,11 @@ let fields = [
 ];
 
 // Assume this code runs in the same scope you have `settings` and `modalSettingsKey`
-console.log('[DEBUG] modalSettingsKey:', modalSettingsKey);
-console.log('[DEBUG] raw data from settings[modalSettingsKey]:', settings[modalSettingsKey]);
-
 // Parse the JSON
 const modalSettings = JSON.parse(settings[modalSettingsKey] || "{}");
-console.log('[DEBUG] parsed modalSettings:', modalSettings);
 
 // Attempt to get iconColor with fallback
 let iconColor = modalSettings?.iconColor ?? "black";
-console.log('[DEBUG] iconColor in modalSettings:', modalSettings.iconColor);
-console.log('[DEBUG] final iconColor used:', iconColor);
 
 // Now you can see if the data is present and if the fallback is being triggered.
 
