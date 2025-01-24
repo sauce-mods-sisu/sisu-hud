@@ -12,6 +12,7 @@ const openConfigBtn   = document.getElementById('open-config-btn');
 const closeConfigBtn  = document.getElementById('close-config-btn');
 const saveConfigBtn   = document.getElementById('save-config-btn');
 const configForm      = document.getElementById('config-form');
+const iconColorPicker = document.getElementById("icon-color");
 
 /** Constants / Keys (for saving to settingsStore) **/
 const fieldStateSettingKey      = 'hudFieldOrder';
@@ -136,6 +137,7 @@ function loadAllSettings() {
   savedScale = parseFloat(settings[textScalingFactorSettingsKey] || "1");
   scaleSlider.value = savedScale;
   statsContainer.style.fontSize = (baseFontSize * savedScale) + 'px';
+  iconColorPicker.value = iconColor;
 }
 
 /* ===============================
@@ -148,6 +150,7 @@ function applySettings() {
     svgEl.style.color  = iconColor;
     svgEl.style.stroke = iconColor;
   });
+  iconColorPicker.value = iconColor;
 }
 
 /* ===============================

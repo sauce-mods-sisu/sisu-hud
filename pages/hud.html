@@ -32,10 +32,6 @@
     
     <div id="hud-content">
       <div class="hud-header">
-        <!-- Draggable handle on the left -->
-        <div class="drag-handle">
-          <img src="icons/move.svg" alt="Move" />
-        </div>
         <div class="config-panel">
           <label for="scale-slider">Scale</label>
           <input 
@@ -46,11 +42,11 @@
             step="0.05"
             value="1"
           />
-          <button id="reset-visibility-btn">Reset Visibility</button>
+          <button id="reset-visibility-btn" class="header-btn">Reset Visibility</button>
 
-          <button id="open-config-btn">Settings</button>
+          <button id="open-config-btn" class="header-btn">Settings</button>
         </div>
-        <button id="close-btn" class="close-btn">X</button>   
+        <button id="close-btn" class="header-btn close-btn">X</button>   
       </div>
 
       <!-- Data fields container -->

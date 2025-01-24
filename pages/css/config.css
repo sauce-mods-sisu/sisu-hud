@@ -1,38 +1,106 @@
+/* Match the HUD’s futuristic, dark theme, neon-green color scheme, and Orbitron font */
+
+/* Overall dialog style */
 dialog {
-    width: 300px;
-    max-width: 90%;
-    border: none;
-    border-radius: 6px;
-    padding: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  width: 300px;
+  max-width: 90%;
+  /* Instead of a plain background, match the HUD’s semi-transparent style */
+  background: rgba(0, 0, 0, 0.85);
+  /* Use neon green border, slightly transparent to match HUD */
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  border-radius: 6px;
+  /* Orbitron + neon green text color */
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  color: #0f0;
+  padding: 1rem;
+  /* A glowing box-shadow in neon green */
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+/* Backdrop tint */
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Fade-in animation to match the HUD’s subtle transitions */
+dialog[open] {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
   }
-  
-  dialog::backdrop {
-    background: rgba(0,0,0,0.4);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  dialog[open] {
-    animation: fadeIn 0.3s ease;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  
-  #config-dialog h2 {
-    margin-top: 0;
-  }
-  #config-dialog fieldset {
-    border: none;
-    padding: 0;
-    margin-bottom: 1rem;
-  }
-  #config-dialog label {
-    display: block;
-    margin: 0.3rem 0;
-  }
-  .popup-buttons {
-    display: flex;
-    justify-content: space-between;
-  }
+}
+
+/* Dialog heading */
+#config-dialog h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #0f0; /* Emphasize neon green */
+}
+
+/* Fieldset & label styling to keep consistent spacing and look */
+#config-dialog fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+#config-dialog label {
+  display: block;
+  margin: 0.3rem 0;
+  font-weight: 600;
+}
+
+/* Buttons in the config dialog should match the HUD’s button styling */
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Base button style (similar to #reset-visibility-btn, etc.) */
+.popup-buttons button,
+#config-dialog button {
+  background: #333;
+  color: #0f0;
+  border: 1px solid #0f0;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Button hover effect: neon highlight */
+.popup-buttons button:hover,
+#config-dialog button:hover {
+  background: #0f0;
+  color: #333;
+}
+
+/* Example color input styling (optional) */
+#config-dialog input[type="color"] {
+  border: 1px solid #0f0;
+  background: #333;
+  width: 50px;
+  height: 30px;
+  cursor: pointer;
+  /* Remove default corner radius if you want a sharper look */
+  border-radius: 2px;
+}
+#config-dialog input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 0;
+}
+#config-dialog input[type="color"]::-webkit-color-swatch-border {
+  border: none;
+}

@@ -4,7 +4,7 @@
     "description"     : "Simple HUD that pins vital stats directly on your Zwift Rider",
     "author"          : "Ryan McCormick",
     "website_url"     : "https://github.com/sauce-mods-sisu/sisu-hud",
-    "version"         : "0.0.2",
+    "version"         : "0.1.0",
     "content_js": [
         "contents/theme.js"
     ],
