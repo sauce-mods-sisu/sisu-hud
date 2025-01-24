@@ -58,6 +58,7 @@ dialog[open] {
   flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
+  margin-bottom: 0.5rem;
 }
 
 #config-dialog fieldset legend {

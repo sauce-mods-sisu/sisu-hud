@@ -4,6 +4,8 @@ html#hud-content {
   left: 5vw;
   width: 50vw;
   height: 40vh;
+  min-width: 500px;
+  min-height: 200px;
   overflow: hidden;
   margin: 0;
   padding: 0;
@@ -13,19 +15,34 @@ html#hud-content {
   color: #0f0;   
   user-select: none;
   z-index: 9999; 
+  -webkit-app-region: drag;
 }
 html::-webkit-scrollbar {
   display: none;
 }
 
+.config-panel,
+.header-btn,
+.resize-handle,
+#scale-slider,
+input,
+select,
+label,
+button,
+#stats-container{
+  -webkit-app-region: no-drag; 
+}
+
 .hud-header {
+  display: flex;
+  justify-content: space-between;
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 24px;
+  height: 36px;
   display: flex;
   align-items: center;
-  padding: 0 4px;
   padding-right: 1rem; 
+  padding-left: 4rem;
   min-height: 30px;
   margin-right: 1rem;
 
@@ -34,22 +51,22 @@ html::-webkit-scrollbar {
   
   opacity: 0.05;
   transition: opacity 0.3s ease;
-  -webkit-app-region: drag;
 }
 .hud-header:hover {
   opacity: 0.85;
 }
 
 .config-panel {
-  -webkit-app-region: no-drag; 
   display: flex;
   align-items: center;
   gap: 8px;
 }
+.config-panel:hover {
+  opacity: 0.85;
+}
 
 .config-panel label {
   font-weight: 600;
-  -webkit-app-region: no-drag;
 }
 
 .header-btn {
@@ -62,25 +79,15 @@ html::-webkit-scrollbar {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  -webkit-app-region: no-drag;
 }
 .header-btn:hover {
   background: #0f0;
   color: #333;
 }
 
-.close-btn {
-  position: absolute;
-  top: 2px;
-  right: 4px;
-  padding: 0 8px;
-  -webkit-app-region: no-drag;
-}
-
 #scale-slider {
   width: 120px;
   accent-color: #0f0; 
-  -webkit-app-region: no-drag;
 }
 #scale-slider::-webkit-slider-runnable-track {
   background: #333;
@@ -94,7 +101,6 @@ html::-webkit-scrollbar {
   cursor: pointer;
   margin-top: -4px; 
 }
-
 #stats-container {
   position: absolute;
   top: 40px; 
@@ -108,8 +114,6 @@ html::-webkit-scrollbar {
   row-gap: 0.125em;
   column-gap: 0.125em;
   padding: 0.0;
-
-
 }
 #stats-container::-webkit-scrollbar {
   display: none;
@@ -118,7 +122,6 @@ html::-webkit-scrollbar {
 .stat-row {
   display: flex;
   align-items: center;
-  -webkit-app-region: no-drag;
 }
 .stat-icon {
   margin-right: 0.3em;
@@ -130,7 +133,6 @@ html::-webkit-scrollbar {
 }
 
 .resize-handle {
-  -webkit-app-region: no-drag;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -149,8 +151,4 @@ html::-webkit-scrollbar {
   line-height: 1.0;
   text-shadow: 0 0 4px rgba(0,0,0,0.8);
   color: none;
-}
-
-.stat-row {
-  -webkit-app-region: no-drag;
 }

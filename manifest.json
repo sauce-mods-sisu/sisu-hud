@@ -6,10 +6,8 @@
     "website_url"     : "https://github.com/sauce-mods-sisu/sisu-hud",
     "version"         : "0.1.0",
     "content_js": [
-        "contents/theme.js"
     ],
     "content_css": [
-        "contents/theme.css"
     ],
     "web_root"        : "pages",
     "windows"         : [{
@@ -21,8 +19,8 @@
         "overlay"       : true,
         "frame"         : true,
         "default_bounds": {
-            "width" : 0.50,
-            "height": 0.50,
+            "width" : 600,
+            "height": 400,
             "x"     : 100,
             "y"     : -100
         }
