@@ -4,8 +4,32 @@
     <meta charset="utf-8" />
     <title>SISU HUD</title>
     <link rel="stylesheet" href="css/hud.css" />
+    <link rel="stylesheet" href="css/config.css" />
   </head>
   <body>
+
+    <!-- Configuration Popup Overlay -->
+    <dialog id="config-dialog">
+      <h2>SISU HUD Options</h2>
+      <form id="config-form" method="dialog">
+        <!-- New: color picker for icons -->
+        <fieldset>
+          <legend>Icon Color:</legend>
+          <label for="icon-color">Choose a color:</label>
+          <input
+            type="color"
+            id="icon-color"
+            name="iconColor"
+            value="#FF0000"
+          />
+        </fieldset>
+        <div class="popup-buttons">
+          <button type="submit" id="save-config-btn">Save</button>
+          <button type="button" id="close-config-btn">Close</button>
+        </div>
+      </form>
+    </dialog>
+    
     <div id="hud-content">
       <div class="hud-header">
         <!-- Draggable handle on the left -->
@@ -23,13 +47,14 @@
             value="1"
           />
           <button id="reset-visibility-btn">Reset Visibility</button>
+
+          <button id="open-config-btn">Settings</button>
         </div>
         <button id="close-btn" class="close-btn">X</button>   
       </div>
 
       <!-- Data fields container -->
       <div id="stats-container"></div>
-
       <!-- Bottom-right resize handle -->
       <div class="resize-handle"></div>
     </div>

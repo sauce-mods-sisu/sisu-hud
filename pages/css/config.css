@@ -1,0 +1,38 @@
+dialog {
+    width: 300px;
+    max-width: 90%;
+    border: none;
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  }
+  
+  dialog::backdrop {
+    background: rgba(0,0,0,0.4);
+  }
+  
+  dialog[open] {
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  #config-dialog h2 {
+    margin-top: 0;
+  }
+  #config-dialog fieldset {
+    border: none;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  #config-dialog label {
+    display: block;
+    margin: 0.3rem 0;
+  }
+  .popup-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
