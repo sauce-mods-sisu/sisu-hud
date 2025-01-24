@@ -35,6 +35,12 @@ Documents
 # Changelog 
 ------------------
 
+## 24 January 2025
+------------------
+- Beta 0.1.0
+- Settings tab with text/icon color
+- Settings modal also shows underlying window size and allows for appropriate resize
+
 ## 22 January 2025
 ------------------
 Alpha 0.0.2
