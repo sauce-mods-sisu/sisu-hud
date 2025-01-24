@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html class="settings-page" tabindex="0" data-settings-key="lap-data-settings-v1">
+<html id="hud-content" tabindex="0" data-settings-key="sisu-hud-config">
   <head>
     <meta charset="utf-8" />
     <title>SISU HUD</title>
+    <!-- Keep your existing stylesheets -->
     <link rel="stylesheet" href="css/hud.css" />
     <link rel="stylesheet" href="css/config.css" />
   </head>
-  <body>
-
     <!-- Configuration Popup Overlay -->
     <dialog id="config-dialog">
       <h2>SISU HUD Options</h2>
       <form id="config-form" method="dialog">
         <!-- New: color picker for icons -->
         <fieldset>
-          <legend>Icon Color:</legend>
-          <label for="icon-color">Choose a color:</label>
-          <input
-            type="color"
-            id="icon-color"
-            name="iconColor"
-            value="#FF0000"
-          />
+          <legend>Select HUD Colors</legend>
+
+          <label for="icon-color">Icons</label>
+          <input type="color" id="icon-color" name="iconColor" value="#FF0000"/>
+
+          <label for="text-color">Values</label>
+          <input type="color" id="value-color" name="valueColor" value="#008000"/>
         </fieldset>
         <div class="popup-buttons">
           <button type="submit" id="save-config-btn">Save</button>
@@ -30,30 +28,29 @@
       </form>
     </dialog>
     
-    <div id="hud-content">
-      <div class="hud-header">
-        <div class="config-panel">
-          <label for="scale-slider">Scale</label>
-          <input 
-            id="scale-slider"
-            type="range"
-            min="0.50"
-            max="2.0"
-            step="0.05"
-            value="1"
-          />
-          <button id="reset-visibility-btn" class="header-btn">Reset Visibility</button>
-
-          <button id="open-config-btn" class="header-btn">Settings</button>
-        </div>
-        <button id="close-btn" class="header-btn close-btn">X</button>   
+    <!-- HUD elements directly in <body> -->
+    <div class="hud-header">
+      <div class="config-panel">
+        <label for="scale-slider">Scale</label>
+        <input 
+          id="scale-slider"
+          type="range"
+          min="0.50"
+          max="2.0"
+          step="0.05"
+          value="1"
+        />
+        <button id="reset-visibility-btn" class="header-btn">Reset Visibility</button>
+        <button id="open-config-btn" class="header-btn">Settings</button>
       </div>
-
-      <!-- Data fields container -->
-      <div id="stats-container"></div>
-      <!-- Bottom-right resize handle -->
-      <div class="resize-handle"></div>
+      <button id="close-btn" class="header-btn close-btn">X</button>   
     </div>
+
+    <!-- Data fields container -->
+    <div id="stats-container"></div>
+    
+    <!-- Bottom-right resize handle -->
+    <div class="resize-handle"></div>
 
     <!-- Template for data fields -->
     <template id="stats-template">
@@ -107,8 +104,6 @@
       </div>
     </template>
 
-    <!-- Load scripts -->
     <script type="module" src="src/hud.mjs"></script>
     <script src="js/Sortable.min.js"></script>
-  </body>
 </html>

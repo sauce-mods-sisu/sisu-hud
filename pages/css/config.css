@@ -1,8 +1,5 @@
-/* Match the HUD’s futuristic, dark theme, neon-green color scheme, and Orbitron font */
-
 /* Overall dialog style */
 dialog {
-  width: 300px;
   max-width: 90%;
   /* Instead of a plain background, match the HUD’s semi-transparent style */
   background: rgba(0, 0, 0, 0.85);
@@ -16,11 +13,16 @@ dialog {
   padding: 1rem;
   /* A glowing box-shadow in neon green */
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  margin: 1rem;
+  transform: none !important;
 }
 
 /* Backdrop tint */
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: flex-start; /* align left */
+  align-items: flex-start;     /* align top (optional) */
 }
 
 /* Fade-in animation to match the HUD’s subtle transitions */
@@ -49,9 +51,22 @@ dialog[open] {
 
 /* Fieldset & label styling to keep consistent spacing and look */
 #config-dialog fieldset {
-  border: none;
-  padding: 0;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  /* This allows items to wrap if the dialog is too narrow,
+     and ensures there's a little space between items */
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+#config-dialog fieldset legend {
+  margin-bottom: 0.5rem;
+}
+
+#config-dialog fieldset label {
+  display: inline-block; 
+  margin-right: 0.3rem;
 }
 
 #config-dialog label {

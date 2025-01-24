@@ -13,6 +13,7 @@ const closeConfigBtn  = document.getElementById('close-config-btn');
 const saveConfigBtn   = document.getElementById('save-config-btn');
 const configForm      = document.getElementById('config-form');
 const iconColorPicker = document.getElementById("icon-color");
+const valueColorPicker = document.getElementById("value-color");
 
 /** Constants / Keys (for saving to settingsStore) **/
 const fieldStateSettingKey      = 'hudFieldOrder';
@@ -42,7 +43,8 @@ let fields = [
 // Loaded settings from storage
 let settings        = null;
 let modalSettings   = {};
-let iconColor       = "black";
+let iconColor       = "#000000";
+let valueColor       = "#008000";
 let savedScale      = 1;
 
 // Keep track of the user we’re rendering for
@@ -97,7 +99,8 @@ function loadAllSettings() {
   // 2) Parse or read the keys we care about
   const rawModal   = settings[modalSettingsKey] || "{}";
   modalSettings    = JSON.parse(rawModal);
-  iconColor        = modalSettings?.iconColor ?? "black";
+  iconColor        = modalSettings?.iconColor ?? "#FF0000";
+  valueColor        = modalSettings?.valueColor ?? "#008000";
 
   const rawFieldState = settings[fieldStateSettingKey] || "[]";
   const savedFieldState = JSON.parse(rawFieldState);
@@ -137,7 +140,10 @@ function loadAllSettings() {
   savedScale = parseFloat(settings[textScalingFactorSettingsKey] || "1");
   scaleSlider.value = savedScale;
   statsContainer.style.fontSize = (baseFontSize * savedScale) + 'px';
+
+  //Set the iconColorPicker Value
   iconColorPicker.value = iconColor;
+  valueColorPicker.value = valueColor;
 }
 
 /* ===============================
@@ -150,7 +156,13 @@ function applySettings() {
     svgEl.style.color  = iconColor;
     svgEl.style.stroke = iconColor;
   });
+
+  document.querySelectorAll('span.stat-value').forEach(valueEl => {
+    valueEl.style.color = valueColor;
+  });
+
   iconColorPicker.value = iconColor;
+  valueColorPicker.value = valueColor;
 }
 
 /* ===============================
@@ -165,6 +177,7 @@ function saveModalSettings(newSettings) {
 
   // Update local references
   iconColor = modalSettings.iconColor;
+  valueColor = modalSettings.valueColor;
 }
 
 /* ===============================
@@ -192,6 +205,7 @@ function renderFields() {
     // Data value <span>
     const span = document.createElement('span');
     span.classList.add('stat-value', field.valueClass);
+    span.style.color = valueColor;
     row.appendChild(span);
 
     statsContainer.appendChild(row);
@@ -240,8 +254,8 @@ function onMouseMove(e) {
   let newWidth = originalWidth + dx;
   let newHeight = originalHeight + dy;
 
-  const winWidth = window.innerWidth * 0.95;
-  const winHeight = window.innerHeight * 0.95;
+  const winWidth = window.innerWidth * 0.99;
+  const winHeight = window.innerHeight * 0.99;
 
   newWidth = Math.min(newWidth, winWidth);
   newHeight = Math.min(newHeight, winHeight);
@@ -381,6 +395,7 @@ function updateStats(data) {
     if (!span) return;
     const val = data[field.id];
     span.textContent = val != null ? val : '--';
+    span.color = valueColor;
   });
 }
 
@@ -418,8 +433,10 @@ function initDialogUI() {
 
     // Suppose you only have a color picker named "iconColor"
     const pickedColor = formData.get('iconColor') || '#000000';
+    const valueColor = formData.get('valueColor') || '#008000';
 
     newSettings.iconColor = pickedColor;
+    newSettings.valueColor = valueColor;
 
     // Save, apply, close
     saveModalSettings(newSettings);
