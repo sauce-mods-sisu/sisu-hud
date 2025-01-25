@@ -25,11 +25,13 @@ Documents
 - Right-clicking will make a stat visible that you don't care about
 - In the config bar you can "Reset Visibility" to restore all stat fields
 - Text scales and your scaling options are saved
+- Settings that allow you to set the color of the icons or values
 
 ### Demos
 - Pilot: https://www.youtube.com/watch?v=o0c5v4ga8A0
  - represents 15 Jan changelog
 - Complete Alpha: https://www.youtube.com/watch?v=4JQxXQm4pt4
+- Beta: 
 
 
 # Changelog 
@@ -37,7 +39,7 @@ Documents
 
 ## 24 January 2025
 ------------------
-- Beta 0.1.0
+- Beta Release - 0.1.0
 - Settings tab with text/icon color
 - Settings modal also shows underlying window size and allows for appropriate resize
 
@@ -68,6 +70,8 @@ Alpha is Born: Resizable and fixed stats
 - All things are in metric because metric is just better (will fix as inclined)
  - p.s. you should be in metric because you get more xp! (20 per km, vs 30 per mile, conversion is 1.62 km per mile)
 - Bounding box and disappearing resizeHandle (square box)
+ - Progress has been made, press Settings Button and it will reveal the Electron Window bounding box that you are free to resize
+- Distance on Pace Partners is also weird. ¯\_(ツ)_/¯
 
 
 ## FAQ
@@ -83,8 +87,7 @@ I look forward to the creative ways the community uses this, I recommend placing
 
 ## Future Features
 ------------------
-- More stats : Gradient, distance to banner, ??
-- Font Selection
 - Support for Imperial and/or your Zwift setting (if I can get to it)
 - Color gradients corresponding to ranges for some stats like wBal or whatnot
 - Maybe way off in the distant future the ability to have multiple windows and pin to riders
+- Profiles
