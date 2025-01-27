@@ -31,11 +31,14 @@ Documents
 - Pilot: https://www.youtube.com/watch?v=o0c5v4ga8A0
  - represents 15 Jan changelog
 - Complete Alpha: https://www.youtube.com/watch?v=4JQxXQm4pt4
-- Beta: 
-
+- Beta: https://www.youtube.com/watch?v=XbdTfcEKf2s
 
 # Changelog 
 ------------------
+
+##
+------------------
+- Opacity Fixes 
 
 ## 24 January 2025
 ------------------

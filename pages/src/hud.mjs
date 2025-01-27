@@ -43,8 +43,8 @@ let fields = [
 // Loaded settings from storage
 let settings        = null;
 let modalSettings   = {};
-let iconColor       = "#000000";
-let valueColor       = "#008000";
+let iconColor       = "#000";
+let valueColor       = "#008";
 let savedScale      = 1;
 
 // Keep track of the user we’re rendering for
@@ -99,8 +99,8 @@ function loadAllSettings() {
   // 2) Parse or read the keys we care about
   const rawModal   = settings[modalSettingsKey] || "{}";
   modalSettings    = JSON.parse(rawModal);
-  iconColor        = modalSettings?.iconColor ?? "#FF0000";
-  valueColor        = modalSettings?.valueColor ?? "#008000";
+  iconColor        = modalSettings?.iconColor ?? "#000";
+  valueColor        = modalSettings?.valueColor ?? "#008";
 
   const rawFieldState = settings[fieldStateSettingKey] || "[]";
   const savedFieldState = JSON.parse(rawFieldState);
@@ -432,8 +432,8 @@ function initDialogUI() {
     const newSettings = {};
 
     // Suppose you only have a color picker named "iconColor"
-    const pickedColor = formData.get('iconColor') || '#000000';
-    const valueColor = formData.get('valueColor') || '#008000';
+    const pickedColor = formData.get('iconColor') || '#000';
+    const valueColor = formData.get('valueColor') || '#008';
 
     newSettings.iconColor = pickedColor;
     newSettings.valueColor = valueColor;
