@@ -36,9 +36,10 @@ Documents
 # Changelog 
 ------------------
 
-##
+## 29 January 2025
 ------------------
-- Opacity Fixes 
+- Opacity Fixes
+- Adding alpha to html and getting rid of background:transparent 
 
 ## 24 January 2025
 ------------------

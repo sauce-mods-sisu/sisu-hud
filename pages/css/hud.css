@@ -24,7 +24,7 @@ html::-webkit-scrollbar {
 html, body {
   margin: 0;
   padding: 0;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.85);
 }
 
 .config-panel,
@@ -153,4 +153,10 @@ button,
   line-height: 1.0;
   text-shadow: 0 0 4px rgba(0,0,0,0.8);
   color: none;
+}
+
+input, select, button {
+  background: rgba(0, 0, 0, 0.2);
+  color: #0f0;
+  border: 1px solid #0f0; 
 }

@@ -157,7 +157,7 @@ function applySettings() {
     svgEl.style.stroke = iconColor;
   });
 
-  document.querySelectorAll('span.stat-value').forEach(valueEl => {
+  document.querySelectorAll('.stat-value').forEach(valueEl => {
     valueEl.style.color = valueColor;
   });
 
