@@ -52,10 +52,12 @@ button,
   min-height: 30px;
   margin-right: 1rem;
   background: rgba(0,0,0,0.05);
-  border-bottom: 1px solid rgba(0,255,0,0.3);
+  border-bottom: 1px solid rgba(0,255,0,0.05);
+  opacity: 0.1;
   transition: opacity 0.3s ease;
 }
 .hud-header:hover {
+  opacity: 1;
   background: rgba(0, 0, 0, 0.40);
 }
 
