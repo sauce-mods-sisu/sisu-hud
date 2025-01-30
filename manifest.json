@@ -17,7 +17,7 @@
         "description"   : "Simplified HUD for your Zwift Rider",
         "always_visible": true,
         "overlay"       : true,
-        "frame"         : true,
+        "frame"         : false,
         "default_bounds": {
             "width" : 600,
             "height": 400,
