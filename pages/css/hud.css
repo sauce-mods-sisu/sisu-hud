@@ -9,12 +9,10 @@ html#hud-content {
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background: rgba(0,0,0,0.05);
   font-family: "Orbitron", sans-serif;
   font-weight: 900; 
-  color: #0f0;   
+  color: #00ff00;   
   user-select: none;
-  z-index: 9999; 
   -webkit-app-region: drag;
 }
 html::-webkit-scrollbar {
@@ -24,7 +22,7 @@ html::-webkit-scrollbar {
 html, body {
   margin: 0;
   padding: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background-color: rgb(127 127 127 / 0.002);
 }
 
 .config-panel,
@@ -76,8 +74,8 @@ button,
 
 .header-btn {
   background: #333;
-  color: #0f0;
-  border: 1px solid #0f0;
+  color: #00ff00;
+  border: 1px solid #00ff00;
   padding: 4px 10px;
   border-radius: 4px;
   font-family: "Orbitron", sans-serif;
@@ -86,23 +84,23 @@ button,
   cursor: pointer;
 }
 .header-btn:hover {
-  background: #0f0;
+  background: #00ff00;
   color: #333;
 }
 
 #scale-slider {
   width: 120px;
-  accent-color: #0f0; 
+  accent-color: #00ff00; 
 }
 #scale-slider::-webkit-slider-runnable-track {
-  background: #333;
+  background: #333f00;
   height: 6px;
 }
 #scale-slider::-webkit-slider-thumb {
   width: 14px;
   height: 14px;
-  background: #0f0;
-  border: 1px solid #0f0;
+  background: #00ff00;
+  border: 1px solid #00ff00;
   cursor: pointer;
   margin-top: -4px; 
 }
@@ -159,6 +157,6 @@ button,
 
 input, select, button {
   background: rgba(0, 0, 0, 0.2);
-  color: #0f0;
-  border: 1px solid #0f0; 
+  color: #00ff00;
+  border: 1px solid #00ff00; 
 }
